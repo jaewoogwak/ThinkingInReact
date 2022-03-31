@@ -1,16 +1,17 @@
+import ProductCategoryRow from "./ProductCategoryRow";
 import ProductRow from "./ProductRow";
 
 function ProductTable(props) {
   return (
-    <>
-      <p>product table</p>
-
+    <article>
+      <header>Product list</header>
       {props.inStockOnly ? (
-        <>
-          <strong>{props.category[0]}</strong>
+        <article>
+          <ProductCategoryRow text={props.category[0]} />
           {props.products
             .filter((product) => product.category == "Sporting Goods")
             .filter((product) => product.stocked)
+            .filter((product) => product.name.includes(props.text))
             .map((product) => (
               <ProductRow
                 key={product.id}
@@ -19,10 +20,11 @@ function ProductTable(props) {
                 name={product.name}
               />
             ))}
-          <strong>{props.category[1]}</strong>
+          <ProductCategoryRow text={props.category[1]} />{" "}
           {props.products
             .filter((product) => product.category == "Electronics")
             .filter((product) => product.stocked)
+            .filter((product) => product.name.includes(props.text))
             .map((product) => (
               <ProductRow
                 key={product.id}
@@ -31,12 +33,13 @@ function ProductTable(props) {
                 name={product.name}
               />
             ))}
-        </>
+        </article>
       ) : (
-        <>
-          <strong>{props.category[0]}</strong>
+        <article>
+          <ProductCategoryRow text={props.category[0]} />
           {props.products
             .filter((product) => product.category == "Sporting Goods")
+            .filter((product) => product.name.includes(props.text))
             .map((product) => (
               <ProductRow
                 key={product.id}
@@ -45,9 +48,10 @@ function ProductTable(props) {
                 name={product.name}
               />
             ))}
-          <strong>{props.category[1]}</strong>
+          <ProductCategoryRow text={props.category[1]} />
           {props.products
             .filter((product) => product.category == "Electronics")
+            .filter((product) => product.name.includes(props.text))
             .map((product) => (
               <ProductRow
                 key={product.id}
@@ -56,9 +60,9 @@ function ProductTable(props) {
                 name={product.name}
               />
             ))}
-        </>
+        </article>
       )}
-    </>
+    </article>
   );
 }
 
